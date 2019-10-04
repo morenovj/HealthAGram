@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+
+body {
+    height: 2000px;
+    font-family: 'Montserrat';
+    text-align: center;
+    background: linear-gradient(180deg, black 60%, rgba(85, 82, 82, 0.13) 60%, #2cb5e8 75%);
+  }
+
+.intro {
+    color: white;
+}
+
+#fit1 {
+    display: block;
+    margin-left: 5%;
+    margin-right: auto;
+    width: 20%;
+}
