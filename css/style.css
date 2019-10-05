@@ -6,7 +6,7 @@ html {
   }
 
 body {
-    height: 4000px;
+    height: 3000px;
     font-family: 'Montserrat';
     text-align: center;
     /* background: linear-gradient(170deg, black 60%, rgb(65, 62, 62) 80%, rgb(145, 139, 139) 70%);*/
@@ -22,31 +22,30 @@ body {
     
   }
 
-.container {
+.grid-container {
     display: grid;
-    grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 25vh 15vh 25vh;
+    grid-template-columns: 1fr 0.3fr 2fr 0.7fr 1fr;
+    grid-template-rows: 1.1fr 0.9fr 1.4fr 1.1fr 0.5fr;
+    grid-template-areas: ". . Primero . ." ". . Segundo . ." ". . Tercero . ." ". . . . ." ". . . . .";
+  }
+  
+.Primero { 
+    grid-area: Primero; 
+
+}
+  
+.Segundo { 
+    grid-area: Segundo; 
+
+}
+  
+.Tercero { 
+    grid-area: Tercero; 
+
 }
 
-.header {
-    grid-column: 3/5;
-}
 
-.sub1 {
-    grid-column: 3/5;
-    grid-row-start: row 2;
-}
 
-.izq {
-    grid-column-start: 1/5;
-    grid-row-start: row 1;
-    justify-self: center;
-}
-
-.der {
-    grid-column-start: 2/5;
-    grid-row-start: row 1;
-}
 
 .intro {
     color: rgb(197, 197, 197);
@@ -57,13 +56,6 @@ body {
 h1 {
     color: white;
     
-}
-
-#fit1 {
-    display: block;
-    margin-left: 5%;
-    margin-right: auto;
-    width: 20%;
 }
 
 #fit2 {
@@ -118,8 +110,47 @@ h1 {
     position: relative;
     width: 300px;
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    color: black;
+    
   }
 
 .card:hover {
     box-shadow: 0 14px 28px rgba(154, 36, 170, 0.25), 0 10px 10px rgba(154, 36, 170, 0.25);
 }
+
+.card {
+	-webkit-animation: card 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: card 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+ @-webkit-keyframes card {
+    0% {
+      -webkit-transform: scale(0);
+              transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes card {
+    0% {
+      -webkit-transform: scale(0);
+              transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+
+#tarj {
+    width: 300px;
+}
+
+ 
