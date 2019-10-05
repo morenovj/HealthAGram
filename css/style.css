@@ -58,6 +58,15 @@ h1 {
     
 }
 
+#fit1 {
+    display: block;
+    margin-left: 5%;
+    margin-right: auto;
+    width: 20%;
+    
+}
+
+
 #fit2 {
     display: block;
     margin-left: auto;
