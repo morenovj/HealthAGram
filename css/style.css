@@ -24,9 +24,9 @@ body {
 
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 0.3fr 2fr 0.7fr 1fr;
+    grid-template-columns: 0.4fr 0.3fr 3.1fr 0.5fr 0.7fr;
     grid-template-rows: 1.1fr 0.9fr 1.4fr 1.1fr 0.5fr;
-    grid-template-areas: ". . Primero . ." ". . Segundo . ." ". . Tercero . ." ". . . . ." ". . . . .";
+    grid-template-areas: ". . Primero . ." ". . Segundo . ." ". . Tercero . ." ". . Cuarto . ." ". . Quinto . .";
   }
   
 .Primero { 
@@ -44,9 +44,6 @@ body {
 
 }
 
-
-
-
 .intro {
     color: rgb(197, 197, 197);
     font-size: 20;
@@ -62,7 +59,7 @@ h1 {
     display: block;
     margin-left: 5%;
     margin-right: auto;
-    width: 20%;
+    width: 15%;
     
 }
 
