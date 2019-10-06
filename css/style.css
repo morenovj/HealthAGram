@@ -24,9 +24,9 @@ body {
 
 .grid-container {
     display: grid;
-    grid-template-columns: 0.4fr 0.3fr 3.1fr 0.5fr 0.7fr;
-    grid-template-rows: 1.1fr 0.9fr 1.4fr 1.1fr 0.5fr;
-    grid-template-areas: ". . Primero . ." ". . Segundo . ." ". . Tercero . ." ". . Cuarto . ." ". . Quinto . .";
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: ". Primero ." ". Segundo ." ". Tercero ." ". Cuarto ." ". Quinto .";
   }
   
 .Primero { 
