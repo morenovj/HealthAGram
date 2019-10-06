@@ -101,9 +101,9 @@ h1 {
 }
 
 @media all and (max-width:30em){
-     button1{
-    display:block;
-    margin:0.4em auto;
+    .button1 {
+      display:block;
+      margin:0.4em auto;
     }
 }
 
