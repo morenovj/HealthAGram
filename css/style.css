@@ -187,4 +187,20 @@ h1 {
   
 }
 
+#textImgRight {
+  display: block;
+  margin-left: auto;
+  margin-right: 50%;
+  margin-top: 10%;
+  width: 25%;
+}
+
+#textImgLeft {
+  display: block;
+  margin-left: 50%;
+  margin-right: auto;
+  margin-top: 10%;
+  width: 25%;
+}
+
  
