@@ -2,68 +2,67 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 html {
-    scroll-behavior: smooth;
-  }
+  scroll-behavior: smooth;
+}
 
 body {
-    font-family: 'Montserrat';
-    text-align: center;
-    background: #232526;  /* Basico */
-    background: -webkit-linear-gradient(to right, #414345, #232526);  /* Viejos */
-    background: linear-gradient(to right, #414345, #232526); /* Actuales */
-  }
+  font-family: 'Montserrat';
+  text-align: center;
+  background: #232526;  /* Basico */
+  background: -webkit-linear-gradient(to right, #414345, #232526);  /* Viejos */
+  background: linear-gradient(to right, #414345, #232526); /* Actuales */
+}
 
 .grid-container {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: 0.5fr 0.5fr 0.5fr 1fr;
-    grid-template-areas: ". Primero ." ". Segundo ." ". Tercero ." ". Cuarto .";
-  }
+  display: grid;
+  grid-template-rows: 0.5fr 0.5fr 0.5fr 1fr;
+  grid-template-areas: ". Primero ." ". Segundo ." ". Tercero ." ". Cuarto .";
+}
   
 .Primero { 
-    grid-area: Primero; 
+  grid-area: Primero; 
 
 }
   
 .Segundo { 
-    grid-area: Segundo; 
+  grid-area: Segundo; 
 
 }
   
 .Tercero { 
-    grid-area: Tercero; 
+  grid-area: Tercero; 
 
 }
 
 .Cuarto {
-    grid-area: Cuarto;
+  grid-area: Cuarto;
 }
 
 .intro {
-    color: rgb(197, 197, 197);
-    font-size: 20;
+  color: rgb(197, 197, 197);
+  font-size: 20;
     
 }
 
 h1 {
-    color: white;
+  color: white;
     
 }
 
 #fit1 {
-    display: block;
-    margin-left: 5%;
-    margin-right: auto;
-    width: 15%;
+  display: block;
+  margin-left: 5%;
+  margin-right: auto;
+  width: 15%;
     
 }
 
 
 #fit2 {
-    display: block;
-    margin-left: auto;
-    margin-right: 5%;
-    width: 20%;
+  display: block;
+  margin-left: auto;
+  margin-right: 5%;
+  width: 20%;
     
 }
 
@@ -78,6 +77,15 @@ h1 {
 .imgInt {
   display: flex;
   flex-direction: row;
+}
+
+.imgInt .square {
+  width: 30em;
+}
+
+.tall {
+  height: 20em;
+  padding-right: 15em;
 }
 
 #sep {
@@ -98,35 +106,28 @@ h1 {
     box-sizing: border-box;
     text-decoration:none;
     font-family:'Roboto',sans-serif;
-    font-weight:300;
+    font-weight: 300;
+    font-size: 40pt;
     color:#FFFFFF;
     text-align: center;
     transition: all 0.2s;
+    width: 50%;
 }
 .button1:hover {
     color:#000000;
     background-color:#FFFFFF;
 }
 
-@media all and (max-width:30em){
-    .button1 {
-      display:block;
-      margin:0.4em auto;
-    }
-}
-
 .card {
-    background: #fff;
-    border-radius: 2px;
-    display: inline-block;
-    height: 300px;
-    margin: 1rem;
-    position: relative;
-    width: 300px;
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-    color: black;
-    
-  }
+  background: #fff;
+  border-radius: 2px;
+  display: inline-block;
+  margin: 1rem;
+  position: relative;
+  width: 20em;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  color: black; 
+}
 
 .card:hover {
     box-shadow: 0 14px 28px rgba(154, 36, 170, 0.25), 0 10px 10px rgba(154, 36, 170, 0.25);
@@ -163,8 +164,8 @@ h1 {
   }
 
 
-#tarj {
-    width: 300px;
+.card img {
+    width: 100%;
 }
 
 
@@ -184,12 +185,10 @@ h1 {
   
 }
 
-#textImgRight {
-  display: block;
-  margin-left: auto;
-  margin-right: 50%;
-  margin-top: 10%;
-  width: 25%;
+.textImg {
+  display: inline-block;
+  width: 10em;
+  margin: auto;
   border-radius: 25px;
   border: 2px solid #609;
   padding: 20px; 
@@ -197,17 +196,90 @@ h1 {
   color: white;
 }
 
-#textImgLeft {
-  display: block;
-  margin-left: 50%;
-  margin-right: auto;
-  margin-top: 10%;
-  width: 25%;
-  border-radius: 25px;
-  border: 2px solid #609;
-  padding: 20px; 
-  background-color: #6200EE;
-  color: white;
+@media only screen and (max-width: 767px) {
+  .tall {
+    height: 20em;
+    padding-right: 5em;
+  }
+
+  #fit1 {
+    display: none;
+  }
+
+  .grid-container {
+    grid-template-columns: 0fr 1fr 0fr;
+  }
+
+  .card {
+    width: 90%;
+  }
+
+  body {
+    font-size: 250%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .tall {
+    height: 20em;
+    padding-right: 5em;
+  }
+
+  #fit1 {
+    display: none;
+  }
+
+  .grid-container {
+    grid-template-columns: 0.5fr 2fr 0.5fr;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  body {
+    font-size: 250%;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  #fit1 {
+    display: none;
+  }
+
+  .grid-container {
+    grid-template-columns: 0.5fr 2fr 0.5fr;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  body {
+    font-size: 150%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .grid-container {
+    grid-template-columns: 1fr 3fr 1fr;
+  }
+  .card {
+    width: 20em;
+  }
+
+  body {
+    font-size: 100%;
+  } 
+  
+  #fit1 {
+    display: block;
+  }
+
+  .button1 {
+    font-size: 30pt;
+    margin-top: 3em;
+  }
 }
 
  
