@@ -1,0 +1,21 @@
+<ion-app>
+  <ion-menu menuId="main" side="start" type="push">
+    <ion-content>
+      <ion-button (click)="onClick()" fill="clear">
+        <ion-thumbnail>
+          <img src="../assets/logoBlanco.png" />
+        </ion-thumbnail>
+      </ion-button>
+      <ion-button (click)="onClick()" fill="clear">
+        <ion-icon slot="icon-only" name="trophy"></ion-icon>
+      </ion-button>
+      <ion-button (click)="onClick()" fill="clear">
+        <ion-icon slot="icon-only" name="person"></ion-icon>
+      </ion-button>
+      <ion-button (click)="onClick()" fill="clear">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet main></ion-router-outlet>
+</ion-app>
