@@ -27,7 +27,6 @@
 
 :root {
     --ion-background-color: linear-gradient(243.18deg, #FFFFFF 0%, #73FAC9 0.01%, rgba(0, 138, 128, 0.76) 100%);
-    --ion-color-primary: rgba(0, 138, 96, 0.77);
     ion-header {
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
     }
@@ -38,8 +37,13 @@
             width: 100%;
             max-height: 100px;
         }
-
-        --background: rgba(0, 138, 96, 0.77);
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+        --ion-background-color: rgba(0, 138, 96, 0.77) !important;
+        ion-content {
+            box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        //background-color: rgba(0, 138, 96, 0.77) !important;
+        /*box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.5) !important;*/
+        
     }
 }
