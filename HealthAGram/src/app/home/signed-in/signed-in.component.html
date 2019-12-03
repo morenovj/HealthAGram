@@ -1,0 +1,45 @@
+<ion-grid style="height: 100%">
+  <ion-row style="height: 50%">
+    <ion-col size-xs="12" size-md="6">
+      <ion-card style="height: 100%">
+        <ion-card-header>
+          <ion-item style="border-radius: 10px;" color="primary" lines="none">
+            <ion-avatar slot="start">
+              <img [src]="(authService.user | async).photoURL" />
+            </ion-avatar>
+            <ion-label>{{ (authService.user | async).displayName }}</ion-label>
+          </ion-item>
+        </ion-card-header>
+        <ion-card-content>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size-xs="12" size-md="6">
+      <ion-card style="height: 100%">
+        <ion-card-content *ngIf="(authService.user | async)?.gym; else noGym">
+
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row style="height: 50%">
+    <ion-col size-xs="12" size-md="12">
+      <ion-card style="height: 90%">
+        <ion-card-header>
+          <ion-card-title>Ejercicios</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ng-template #noGym>
+  <ion-grid style="height: 100%;">
+    <ion-row style="height: 50%;">
+      <ion-icon name="help"></ion-icon>
+    </ion-row>
+    <ion-row style="height: 50%;">
+      <ion-header>Encuentra tu Gym</ion-header>
+    </ion-row>
+  </ion-grid>
+</ng-template>

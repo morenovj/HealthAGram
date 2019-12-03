@@ -20,10 +20,6 @@ export class AppComponent {
     this.initializeApp();
   }
 
-  signIn() {
-    this.authService.signIn();
-  }
-
   signOut() {
     this.authService.signOut();
   }

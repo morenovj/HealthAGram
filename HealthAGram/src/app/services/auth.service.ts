@@ -14,7 +14,7 @@ export class AuthService {
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) { 
     this.user = this.afAuth.authState.pipe(switchMap(user => {
       if (user) {
-        return this.afs.doc(`users/${user}`).valueChanges();
+        return this.afs.doc(`users/${user.uid}`).valueChanges();
       } else {
         return of(null);
       }
@@ -24,7 +24,6 @@ export class AuthService {
   async signIn() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.auth.signInWithPopup(provider);
-    console.log('signed in', credential.user);
     return this.updateUserData(credential.user);
   }
 

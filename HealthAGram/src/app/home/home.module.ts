@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { NotSignedInComponent } from './not-signed-in/not-signed-in.component';
+import { SignedInComponent } from './signed-in/signed-in.component';
 
 @NgModule({
   imports: [
@@ -18,6 +20,6 @@ import { HomePage } from './home.page';
       }
     ])
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, NotSignedInComponent, SignedInComponent]
 })
 export class HomePageModule {}
