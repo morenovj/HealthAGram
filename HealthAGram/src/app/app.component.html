@@ -1,16 +1,16 @@
 <ion-app>
   <ion-menu menuId="main" side="start" type="push">
     <ion-content color="primary">
-      <ion-button (click)="onClick()" fill="clear" class="ion-margin-vertical">
+      <ion-button fill="clear" class="ion-margin-vertical" routerLink="/home/">
         <ion-thumbnail>
           <img src="../assets/logoBlanco.png" />
         </ion-thumbnail>
       </ion-button>
-      <ion-button fill="clear" class="ion-margin-vertical">
+      <ion-button fill="clear" class="ion-margin-vertical" routerLink="/ranking/">
         <ion-icon color = "medium" slot="icon-only" name="trophy"></ion-icon>
       </ion-button>
-      <ion-button (click)="onClick()" fill="clear" class="ion-margin-vertical">
-        <ion-icon color = "medium" slot="icon-only" name="person"></ion-icon>
+      <ion-button fill="clear" class="ion-margin-vertical" routerLink="/ejercicios/">
+        <ion-icon color = "medium" slot="icon-only" name="fitness"></ion-icon>
       </ion-button>
       <ion-button (click)="signOut()" fill="clear" class="ion-margin-vertical">
         <ion-icon color = "medium" slot="icon-only" name="exit"></ion-icon>

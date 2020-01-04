@@ -1,21 +1,73 @@
-<ion-grid style="height: 100%">
+<ion-grid>
   <ion-row style="height: 50%">
     <ion-col size-xs="12" size-md="6">
-      <ion-card style="height: 100%">
+      <ion-card style="max-height: 100%">
         <ion-card-header>
           <ion-item style="border-radius: 10px;" color="primary" lines="none">
             <ion-avatar slot="start">
-              <img [src]="(authService.user | async).photoURL" />
+              <img [src]="(authService.user | async)?.photoURL" />
             </ion-avatar>
-            <ion-label>{{ (authService.user | async).displayName }}</ion-label>
+            <ion-label>{{ (authService.user | async)?.displayName }}</ion-label>
+            <ion-button (click)="openEditProfileModal()" slot="end" fill="clear">
+              <ion-icon slot="icon-only" name="create" color="dark"></ion-icon>
+            </ion-button>
           </ion-item>
         </ion-card-header>
         <ion-card-content>
+          <ion-grid fixed>
+            <ion-row id="datosBasicos">
+              <ion-col size="6" id="peso">
+                <ng-container *ngIf="(authService.user | async)?.weight; else missingData">
+                  <ion-text class="ion-text-center" color="dark">
+                    <h1>Peso</h1>
+                  </ion-text>
+                  <ion-text class="ion-text-center" color="dark">
+                    <h2>{{ (authService.user | async)?.weight }} kg</h2>
+                  </ion-text>
+                </ng-container>
+              </ion-col>
+              <ion-col size="6" id="altura">
+                <ng-container *ngIf="(authService.user | async)?.height; else missingData">
+                  <ion-text class="ion-text-center" color="dark">
+                    <h1>Altura</h1>
+                  </ion-text>
+                  <ion-text class="ion-text-center" color="dark">
+                  <h2>{{ (authService.user | async)?.height }} cm</h2>
+                  </ion-text>
+                </ng-container>
+              </ion-col>
+            </ion-row>
+            <ion-row id="bmi">
+              <ion-col size="12">
+                <ng-container *ngIf="(authService.user | async)?.height && (authService.user | async)?.weight; else missingData"></ng-container>
+                <ion-text class="ion-text-center" color="dark">
+                <h1>BMI</h1>
+                </ion-text>
+                <ion-text class="ion-text-center" color="dark">
+                  <h2>{{ ((authService.user | async)?.weight / ((((authService.user | async)?.height)/100) * (((authService.user | async)?.height)/100))) | number : '.2-2' }}</h2>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row id="personalInfo">
+              <ion-col size="6" class="ion-text-center" id="email">
+                <ion-text color="dark">
+                  <h3>E-mail</h3>
+                  <p *ngIf="(authService.user | async)?.email; else missingDataSmall">{{ (authService.user | async)?.email }}</p>
+                </ion-text>
+              </ion-col>
+              <ion-col size="6" class="ion-text-center" id="age">
+                <ion-text color="dark">
+                  <h3>Edad</h3>
+                  <p *ngIf="(authService.user | async)?.age; else missingDataSmall">{{ (authService.user | async)?.age }}</p>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </ion-card-content>
       </ion-card>
     </ion-col>
-    <ion-col size-xs="12" size-md="6">
-      <ion-card style="height: 100%">
+    <ion-col size-xs="12" size-md="6" style="max-height: 100%">
+      <ion-card style="height: 100%; overflow: hidden;">
         <ion-card-content *ngIf="(authService.user | async)?.gym; else noGym">
 
         </ion-card-content>
@@ -34,12 +86,31 @@
 </ion-grid>
 
 <ng-template #noGym>
-  <ion-grid style="height: 100%;">
-    <ion-row style="height: 50%;">
-      <ion-icon name="help"></ion-icon>
-    </ion-row>
-    <ion-row style="height: 50%;">
-      <ion-header>Encuentra tu Gym</ion-header>
-    </ion-row>
-  </ion-grid>
+  <ion-card-header>
+    <ion-card-title>No perteneces a un Gym</ion-card-title>
+    <ion-card-subtitle>¡Encuentra el tuyo!</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content style="overflow-y: scroll; height: 80%">
+    <ion-list>
+      <ion-item *ngFor="let gym of gymList | async" color="none">
+        <ion-avatar slot="start">
+          <img [src]="gym.foto" />
+        </ion-avatar>
+        <ion-label>{{ gym.nombre }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ng-template>
+
+<ng-template #missingData>
+  <div class="ion-text-center">
+    <ion-icon name="help" size="large" color="dark"></ion-icon>
+    <ion-text color="dark">
+      <h1>No hay informacion!</h1>
+    </ion-text>
+  </div>
+</ng-template>
+
+<ng-template #missingDataSmall>
+  <ion-icon name="help" size="small" color="dark"></ion-icon>
 </ng-template>

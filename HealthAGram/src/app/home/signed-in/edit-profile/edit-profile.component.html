@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Editar Perfil</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button fill="clear" (click)="modalDismiss()">Cancelar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="editingForm">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item color="none">
+            <ion-label position="floating">
+              <ion-icon name="person"></ion-icon>
+              Nombre y Apellidos
+            </ion-label>
+            <ion-input formControlName="displayName">
+            </ion-input>
+          </ion-item>
+          <ion-item color="none">
+            <ion-label position="floating">
+              <ion-icon name="person"></ion-icon>
+              Peso (en KG)
+            </ion-label>
+            <ion-input formControlName="weight">
+            </ion-input>
+          </ion-item>
+          <ion-item color="none">
+            <ion-label position="floating">
+              <ion-icon name="person"></ion-icon>
+              Altura (en CM)
+            </ion-label>
+            <ion-input formControlName="height">
+            </ion-input>
+          </ion-item>
+          <ion-item color="none">
+            <ion-label position="floating">
+              <ion-icon name="person"></ion-icon>
+              Edad
+            </ion-label>
+            <ion-input formControlName="age">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- fab placed to the bottom end -->
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="onSubmit()" [disabled]="!editingForm.valid">
+        <ion-icon name="checkmark"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </form>
+</ion-content>

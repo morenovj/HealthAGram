@@ -1,0 +1,62 @@
+ion-item {
+    border-radius: 10px;
+}
+
+#datosBasicos {
+    border-bottom: 1px solid black;
+}
+
+#peso {
+    border-right: 1px solid black;
+}
+
+#altura {
+    border-left: 1px solid black;
+}
+
+#bmi {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#peso h2 {
+    font-size: 36pt;
+}
+
+#altura h2 {
+    font-size: 36pt;
+}
+
+#bmi h2 {
+    font-size: 36pt;
+}
+
+#personalInfo {
+    border-top: 1px solid black;
+}
+
+#age p {
+    font-size: 36pt;
+}
+
+#email p {
+    font-size: 12pt;
+}
+
+#email {
+    border-right: 1px solid black;
+}
+
+#age {
+    border-left: 1px solid black;
+}
+
+@media (min-width: 768px) {
+    ion-grid {
+        height: 100%
+    }
+
+    #email p {
+        font-size: 20pt;
+    }
+}

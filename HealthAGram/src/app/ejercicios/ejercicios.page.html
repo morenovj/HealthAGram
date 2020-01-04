@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Ejercicios</ion-title>
+    <ion-chip slot="end" *ngIf="authService.user | async">
+      <ion-avatar>
+        <img [src]="(authService.user | async)?.photoURL">
+      </ion-avatar>
+      <ion-label>
+        {{ (authService.user | async)?.displayName }}
+      </ion-label>
+    </ion-chip>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides scrollbar="true" (ionSlideDidChange)="slideChanged($event)" #slides>
+    <ion-slide>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Press de Banca</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Peso Muerto</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Press Militar</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-card> <!--*ngIf="currentIndex == 0"-->
+    <ion-card-content>
+      <iframe width="560" height="315" [src]="trustedVideoUrl" frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </ion-card-content>
+  </ion-card>
+  
+
+</ion-content>

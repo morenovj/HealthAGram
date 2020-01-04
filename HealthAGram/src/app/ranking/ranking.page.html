@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Ranking de Gimnasios</ion-title>
+    <ion-chip slot="end" *ngIf="authService.user | async">
+      <ion-avatar>
+        <img [src]="(authService.user | async)?.photoURL">
+      </ion-avatar>
+      <ion-label>
+        {{ (authService.user | async)?.displayName }}
+      </ion-label>
+    </ion-chip>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+</ion-content>
