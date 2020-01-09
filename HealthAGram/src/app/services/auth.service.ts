@@ -12,7 +12,7 @@ import { User } from '../models/user';
 export class AuthService {
   user: Observable<any>;
 
-  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) { 
+  constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore) { 
     this.user = this.afAuth.authState.pipe(switchMap(user => {
       if (user) {
         return this.afs.doc(`users/${user.uid}`).valueChanges();
@@ -25,7 +25,10 @@ export class AuthService {
   async signIn() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.auth.signInWithPopup(provider);
-    return this.updateUserData(credential.user);
+
+    if(credential.additionalUserInfo.isNewUser) {
+      this.updateUserData(credential.user);
+    }
   }
 
   updateUserData(user) {

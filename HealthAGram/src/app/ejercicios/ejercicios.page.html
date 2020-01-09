@@ -17,27 +17,14 @@
 
 <ion-content>
   <ion-slides scrollbar="true" (ionSlideDidChange)="slideChanged($event)" #slides>
-    <ion-slide>
+    <ion-slide *ngFor="let ejercicio of fireList | async">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>Press de Banca</ion-card-title>
+          <ion-card-title>{{ ejercicio.nombre }}</ion-card-title>
         </ion-card-header>
       </ion-card>
     </ion-slide>
-    <ion-slide>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Peso Muerto</ion-card-title>
-        </ion-card-header>
-      </ion-card>
-    </ion-slide>
-    <ion-slide>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Press Militar</ion-card-title>
-        </ion-card-header>
-      </ion-card>
-    </ion-slide>
+    
   </ion-slides>
 
   <ion-card> <!--*ngIf="currentIndex == 0"-->

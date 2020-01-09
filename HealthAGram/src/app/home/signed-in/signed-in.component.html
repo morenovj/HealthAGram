@@ -68,6 +68,10 @@
     </ion-col>
     <ion-col size-xs="12" size-md="6" style="max-height: 100%">
       <ion-card style="height: 100%; overflow: hidden;">
+        <img [src]="(userGym | async)?.foto" style="max-height: 50%; width:auto; border-bottom-right-radius: 2em; border-bottom-left-radius: 2em;">
+        <ion-card-header>
+          <ion-card-title>{{ (userGym | async)?.nombre }}</ion-card-title>
+        </ion-card-header>
         <ion-card-content *ngIf="(authService.user | async)?.gym; else noGym">
 
         </ion-card-content>
@@ -92,11 +96,11 @@
   </ion-card-header>
   <ion-card-content style="overflow-y: scroll; height: 80%">
     <ion-list>
-      <ion-item *ngFor="let gym of gymList | async" color="none">
+      <ion-item *ngFor="let gym of gymList | async" color="none" (click)="confirmGym(gym.payload.doc.id)">
         <ion-avatar slot="start">
-          <img [src]="gym.foto" />
+          <img [src]="gym.payload.doc.data().foto" />
         </ion-avatar>
-        <ion-label>{{ gym.nombre }}</ion-label>
+        <ion-label>{{ gym.payload.doc.data().nombre }}</ion-label>
       </ion-item>
     </ion-list>
   </ion-card-content>

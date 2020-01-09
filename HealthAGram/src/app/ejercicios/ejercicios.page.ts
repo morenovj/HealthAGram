@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { IonSlides } from '@ionic/angular';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -11,7 +14,14 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class EjerciciosPage implements OnInit {
   @ViewChild('slides', {static: true}) slides: IonSlides;
-  constructor(public authService: AuthService, private domSanitizer: DomSanitizer) { }
+  fireList;
+  constructor(public authService: AuthService, private domSanitizer: DomSanitizer, public afs: AngularFirestore) { 
+    this.fireList = this.authService.user.pipe(switchMap(user => {
+      return this.afs.collection(
+        `ejercicios`, ref => ref.where('idU', '==', this.currentIndex)
+      ).valueChanges();
+    }));
+  }
 
   currentIndex = 0; // Variable para almacenar el indice del slide actual
   slideChanged(e: any) { // Metodo para obtener el indice del slide al cambio
@@ -30,6 +40,9 @@ export class EjerciciosPage implements OnInit {
       this.trustedVideoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(currentIndex.vid_link);
     }
   }  
+
+
+
 
   ngOnInit() {
   }
