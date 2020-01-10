@@ -6,6 +6,7 @@ import { Gym } from 'src/app/models/gym';
 import { ModalController, ActionSheetController } from '@ionic/angular';
 import { EditProfileComponent } from './edit-profile/edit-profile.component'
 import { take, switchMap } from 'rxjs/operators';
+import { environment } from '../../../environments/environment'
 
 @Component({
   selector: 'app-signed-in',
@@ -15,13 +16,19 @@ import { take, switchMap } from 'rxjs/operators';
 export class SignedInComponent implements OnInit {
   gymList: Observable<any>;
   userGym: Observable<any>;
+  apiKey = environment.firebaseConfig.apiKey;
+  gymEncoded;
 
   constructor(public authService: AuthService, private afs: AngularFirestore, private modalController: ModalController, private actionSheetController: ActionSheetController) { }
 
   ngOnInit() {
     this.gymList = this.afs.collection<Gym>('/gyms').snapshotChanges();
-    this.userGym = this.afs.doc(`users/${this.authService.afAuth.auth.currentUser.uid}`).valueChanges().pipe(switchMap(user => {
-      if(user.gym !== "") {
+    this.userGym = this.afs.doc<any>(`users/${this.authService.afAuth.auth.currentUser.uid}`).valueChanges().pipe(switchMap(user => {
+      if(user.gym !== "" || user.gym) {
+        this.afs.doc<any>(`gyms/${user.gym}`).valueChanges().pipe(take(1)).subscribe(gym => {
+          this.gymEncoded = encodeURI(gym.direccion);
+          console.log(this.gymEncoded);
+        });
         return this.afs.doc(`gyms/${user.gym}`).valueChanges();
       }
 
@@ -64,8 +71,31 @@ export class SignedInComponent implements OnInit {
     })
   }
 
+  confirmGymRemoval() {
+    this.actionSheetController.create({
+      header: '¿Quieres salir de este Gym?',
+      mode: 'ios',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel'
+        },
+        {
+          text: 'Si',
+          handler: () => this.removeGymMembership()
+        }
+      ]
+    }).then(actionSheet => {
+      actionSheet.present();
+    })
+  }
+
   addGymMembership(gymId) {
     this.afs.doc(`users/${this.authService.afAuth.auth.currentUser.uid}`).update({gym: gymId});
+  }
+
+  removeGymMembership() {
+    this.afs.doc(`users/${this.authService.afAuth.auth.currentUser.uid}`).update({gym: null});
   }
 
 

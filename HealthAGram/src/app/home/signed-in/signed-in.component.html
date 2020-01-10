@@ -68,12 +68,52 @@
     </ion-col>
     <ion-col size-xs="12" size-md="6" style="max-height: 100%">
       <ion-card style="height: 100%; overflow: hidden;">
-        <img [src]="(userGym | async)?.foto" style="max-height: 50%; width:auto; border-bottom-right-radius: 2em; border-bottom-left-radius: 2em;">
-        <ion-card-header>
-          <ion-card-title>{{ (userGym | async)?.nombre }}</ion-card-title>
+        <ion-card-header *ngIf="(authService.user | async)?.gym;">
+          <ion-item color="primary" lines="none">
+            <ion-avatar slot="start" style="height: 5em; width: 5em">
+              <img [src]="(userGym | async)?.foto" />
+            </ion-avatar>
+            <ion-label class="ion-text-wrap">{{ (userGym | async)?.nombre }}</ion-label>
+            <ion-button (click)="confirmGymRemoval()" slot="end" fill="clear">
+              <ion-icon slot="icon-only" name="close" color="dark"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-card-header>
+        <ion-card-header color *ngIf="!(authService.user | async)?.gym;">
+          <ion-item color="primary">
+            <ion-card-title>No perteneces a un Gym</ion-card-title>
+          </ion-item>
         </ion-card-header>
         <ion-card-content *ngIf="(authService.user | async)?.gym; else noGym">
-
+          <ion-grid no-padding>
+            <ion-row class="ion-align-items-center">
+              <ion-col size="12" size-md="6">
+                <ion-item lines="none" color="dark">
+                  <ion-label>
+                    <h2>Rating</h2>
+                    <ion-range min="0" max="10" [value]="(userGym | async)?.rating" color="danger" rating style="pointer-events: none;">
+                      <ion-icon slot="start" size="small" color="danger" name="star-outline"></ion-icon>
+                      <ion-icon slot="end" color="danger" name="star"></ion-icon>
+                    </ion-range>
+                    <img [src]="'https://maps.googleapis.com/maps/api/staticmap?size=180x180&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C'+ gymEncoded +'&key=' + apiKey" alt="Mapa localizacion" style="height: 180px; width: auto; margin: auto; border-radius: .5em">
+                  </ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="6">
+                <ion-item lines="none" color="medium" class="ion-margin">
+                  <ion-label><p>{{ (userGym | async)?.direccion }}</p></ion-label>
+                </ion-item>
+                <ion-card color="medium">
+                  <ion-card-header>
+                    <ion-card-title>Descripcion</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <p>{{ (userGym | async)?.descripcion }}</p>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </ion-card-content>
       </ion-card>
     </ion-col>
@@ -90,10 +130,6 @@
 </ion-grid>
 
 <ng-template #noGym>
-  <ion-card-header>
-    <ion-card-title>No perteneces a un Gym</ion-card-title>
-    <ion-card-subtitle>¡Encuentra el tuyo!</ion-card-subtitle>
-  </ion-card-header>
   <ion-card-content style="overflow-y: scroll; height: 80%">
     <ion-list>
       <ion-item *ngFor="let gym of gymList | async" color="none" (click)="confirmGym(gym.payload.doc.id)">

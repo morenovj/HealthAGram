@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { EjerciciosPageRoutingModule } from './ejercicios-routing.module';
 
 import { EjerciciosPage } from './ejercicios.page';
+import { YoutubePipe } from './youtube.pipe';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { EjerciciosPage } from './ejercicios.page';
     IonicModule,
     EjerciciosPageRoutingModule
   ],
-  declarations: [EjerciciosPage]
+  declarations: [EjerciciosPage, YoutubePipe]
 })
 export class EjerciciosPageModule {}

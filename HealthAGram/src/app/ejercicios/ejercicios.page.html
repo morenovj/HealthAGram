@@ -18,21 +18,36 @@
 <ion-content>
   <ion-slides scrollbar="true" (ionSlideDidChange)="slideChanged($event)" #slides>
     <ion-slide *ngFor="let ejercicio of fireList | async">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>{{ ejercicio.nombre }}</ion-card-title>
-        </ion-card-header>
-      </ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>{{ ejercicio.nombre }}</ion-card-title>
+              </ion-card-header>
+            </ion-card>
+            <ion-card>
+              <ion-card-content>
+                <ion-grid fixed>
+                  <ion-row>
+                    <ion-col size="12" size-md="6" offset-md="3">
+                      <iframe width="100%" height="315" [src]="ejercicio.videoURL | youtube" frameborder="0"
+                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <ion-item color="secondary">
+                  <ion-icon name="alert" size="small" slot="start"></ion-icon>
+                  <ion-label text-wrap>{{ ejercicio.descripcion }}</ion-label>
+                </ion-item>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
     </ion-slide>
     
   </ion-slides>
-
-  <ion-card> <!--*ngIf="currentIndex == 0"-->
-    <ion-card-content>
-      <iframe width="560" height="315" [src]="trustedVideoUrl" frameborder="0"
-      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </ion-card-content>
-  </ion-card>
-  
 
 </ion-content>
