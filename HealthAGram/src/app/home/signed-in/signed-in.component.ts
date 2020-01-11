@@ -7,6 +7,7 @@ import { ModalController, ActionSheetController } from '@ionic/angular';
 import { EditProfileComponent } from './edit-profile/edit-profile.component'
 import { take, switchMap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment'
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-signed-in',
@@ -17,6 +18,7 @@ export class SignedInComponent implements OnInit {
   gymList: Observable<any>;
   userGym: Observable<any>;
   exercisesObservable: Observable<any>;
+  exerciseScores: Observable<any>;
   apiKey = environment.firebaseConfig.apiKey;
   gymEncoded;
 
@@ -37,13 +39,18 @@ export class SignedInComponent implements OnInit {
     this.exercisesObservable = this.afs.doc<any>(`users/${this.authService.afAuth.auth.currentUser.uid}`).valueChanges().pipe(switchMap(user => {
       if (user.exercises.length > 0) {
         let subscriptions = user.exercises.map(exercise => {
-          return this.afs.doc<any>(`ejercicios/${exercise}`).snapshotChanges();
+          return this.afs.doc<any>(`ejercicios/${exercise.id}`).snapshotChanges();
         });
         return combineLatest(subscriptions);
       } else {
-        return of([]);
+        return of(null);
       }
     }))
+  }
+
+  removeExerciseFollow(id) {
+    console.log(id)
+    this.afs.doc(`users/${this.authService.afAuth.auth.currentUser.uid}`).ref.update('exercises', firebase.firestore.FieldValue.arrayRemove({id}));
   }
 
   openEditProfileModal() {

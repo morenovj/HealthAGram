@@ -7,4 +7,6 @@ export interface User {
     age: number;
     weight: number;
     height: number;
+    exercises;
+    exerciseScores;
 }

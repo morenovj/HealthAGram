@@ -42,7 +42,9 @@ export class AuthService {
       gym: '',
       age: null,
       weight: null,
-      height: null
+      height: null,
+      exercises: [],
+      exerciseScores: {}
     }
 
     return userRef.set(data, { merge: true })

@@ -1,7 +1,7 @@
 <ion-grid>
   <ion-row style="height: 50%">
-    <ion-col size-xs="12" size-md="6">
-      <ion-card style="max-height: 100%">
+    <ion-col size-xs="12" size-md="6" style="max-height: 100%">
+      <ion-card style="height: 100%;">
         <ion-card-header>
           <ion-item style="border-radius: 10px;" color="primary" lines="none">
             <ion-avatar slot="start">
@@ -14,7 +14,7 @@
           </ion-item>
         </ion-card-header>
         <ion-card-content>
-          <ion-grid fixed>
+          <ion-grid>
             <ion-row id="datosBasicos">
               <ion-col size="6" id="peso">
                 <ng-container *ngIf="(authService.user | async)?.weight; else missingData">
@@ -67,7 +67,7 @@
       </ion-card>
     </ion-col>
     <ion-col size-xs="12" size-md="6" style="max-height: 100%">
-      <ion-card style="height: 100%; overflow: hidden;">
+      <ion-card style="height: 100%;">
         <ion-card-header *ngIf="(authService.user | async)?.gym;">
           <ion-item color="primary" lines="none">
             <ion-avatar slot="start" style="height: 5em; width: 5em">
@@ -127,19 +127,35 @@
           </ion-item>
         </ion-card-header>
         <ion-card-content>
-          <ion-card *ngFor="let exercise of exercisesObservable | async" style="display: inline-block;" color="medium">
-            <ion-card-header>
-              <ion-card-title>{{ exercise.payload.data().nombre }}</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-button (click)="confirmGymRemoval()" slot="end" fill="clear">
-                <ion-icon slot="icon-only" name="information-circle-outline" color="dark"></ion-icon>
-              </ion-button>
-              <ion-button (click)="confirmGymRemoval()" slot="end" fill="clear">
-                <ion-icon slot="icon-only" name="close" color="danger"></ion-icon>
-              </ion-button>
-            </ion-card-content>
-          </ion-card>
+          <ion-slides pager="true">
+            <ion-slide *ngFor="let exercise of exercisesObservable | async; let index = index">
+              <ion-card color="medium">
+                <ion-card-header>
+                  <ion-card-title>{{ exercise.payload.data().nombre }}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col size="6">
+                        <h2>Peso</h2>
+                        <p>{{ (authService.user | async)?.exercises[index].weight }}</p>
+                      </ion-col>
+                      <ion-col size="6">
+                        <h2>Reps</h2>
+                        <p>{{ (authService.user | async)?.exercises[index].reps }}</p>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                  <ion-button (click)="confirmGymRemoval()" slot="end" fill="clear">
+                    <ion-icon slot="icon-only" name="information-circle-outline" color="dark"></ion-icon>
+                  </ion-button>
+                  <ion-button (click)="removeExerciseFollow(exercise.payload.id)" slot="end" fill="clear">
+                    <ion-icon slot="icon-only" name="close" color="danger"></ion-icon>
+                  </ion-button>
+                </ion-card-content>
+              </ion-card>
+            </ion-slide>
+          </ion-slides>
         </ion-card-content>
       </ion-card>
     </ion-col>
