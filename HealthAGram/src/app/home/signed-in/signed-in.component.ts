@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { Observable, of } from 'rxjs';
+import { Observable, of, combineLatest } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Gym } from 'src/app/models/gym';
 import { ModalController, ActionSheetController } from '@ionic/angular';
@@ -16,6 +16,7 @@ import { environment } from '../../../environments/environment'
 export class SignedInComponent implements OnInit {
   gymList: Observable<any>;
   userGym: Observable<any>;
+  exercisesObservable: Observable<any>;
   apiKey = environment.firebaseConfig.apiKey;
   gymEncoded;
 
@@ -27,12 +28,21 @@ export class SignedInComponent implements OnInit {
       if(user.gym !== "" || user.gym) {
         this.afs.doc<any>(`gyms/${user.gym}`).valueChanges().pipe(take(1)).subscribe(gym => {
           this.gymEncoded = encodeURI(gym.direccion);
-          console.log(this.gymEncoded);
         });
         return this.afs.doc(`gyms/${user.gym}`).valueChanges();
       }
 
       return of(null);
+    }));
+    this.exercisesObservable = this.afs.doc<any>(`users/${this.authService.afAuth.auth.currentUser.uid}`).valueChanges().pipe(switchMap(user => {
+      if (user.exercises.length > 0) {
+        let subscriptions = user.exercises.map(exercise => {
+          return this.afs.doc<any>(`ejercicios/${exercise}`).snapshotChanges();
+        });
+        return combineLatest(subscriptions);
+      } else {
+        return of([]);
+      }
     }))
   }
 

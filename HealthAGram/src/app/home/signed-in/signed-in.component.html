@@ -80,7 +80,7 @@
           </ion-item>
         </ion-card-header>
         <ion-card-header color *ngIf="!(authService.user | async)?.gym;">
-          <ion-item color="primary">
+          <ion-item color="primary" lines="none">
             <ion-card-title>No perteneces a un Gym</ion-card-title>
           </ion-item>
         </ion-card-header>
@@ -122,8 +122,25 @@
     <ion-col size-xs="12" size-md="12">
       <ion-card style="height: 90%">
         <ion-card-header>
-          <ion-card-title>Ejercicios</ion-card-title>
+          <ion-item color="primary" lines="none">
+            Ejercicios
+          </ion-item>
         </ion-card-header>
+        <ion-card-content>
+          <ion-card *ngFor="let exercise of exercisesObservable | async" style="display: inline-block;" color="medium">
+            <ion-card-header>
+              <ion-card-title>{{ exercise.payload.data().nombre }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-button (click)="confirmGymRemoval()" slot="end" fill="clear">
+                <ion-icon slot="icon-only" name="information-circle-outline" color="dark"></ion-icon>
+              </ion-button>
+              <ion-button (click)="confirmGymRemoval()" slot="end" fill="clear">
+                <ion-icon slot="icon-only" name="close" color="danger"></ion-icon>
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-card-content>
       </ion-card>
     </ion-col>
   </ion-row>
