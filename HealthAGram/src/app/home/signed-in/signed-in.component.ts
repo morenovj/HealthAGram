@@ -5,9 +5,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Gym } from 'src/app/models/gym';
 import { ModalController, ActionSheetController } from '@ionic/angular';
 import { EditProfileComponent } from './edit-profile/edit-profile.component'
+import { ExerciseFollowListComponent } from './exercise-follow-list/exercise-follow-list.component';
 import { take, switchMap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment'
 import * as firebase from 'firebase/app';
+import { ExerciseDescriptionComponent } from './exercise-description/exercise-description.component';
 
 @Component({
   selector: 'app-signed-in',
@@ -26,17 +28,16 @@ export class SignedInComponent implements OnInit {
 
   ngOnInit() {
     this.gymList = this.afs.collection<Gym>('/gyms').snapshotChanges();
-    this.userGym = this.afs.doc<any>(`users/${this.authService.afAuth.auth.currentUser.uid}`).valueChanges().pipe(switchMap(user => {
+    this.userGym = this.authService.user.pipe(switchMap(user => {
       if(user.gym !== "" || user.gym) {
         this.afs.doc<any>(`gyms/${user.gym}`).valueChanges().pipe(take(1)).subscribe(gym => {
           this.gymEncoded = encodeURI(gym.direccion);
         });
         return this.afs.doc(`gyms/${user.gym}`).valueChanges();
       }
-
       return of(null);
     }));
-    this.exercisesObservable = this.afs.doc<any>(`users/${this.authService.afAuth.auth.currentUser.uid}`).valueChanges().pipe(switchMap(user => {
+    this.exercisesObservable = this.authService.user.pipe(switchMap(user => {
       if (user.exercises.length > 0) {
         let subscriptions = user.exercises.map(exercise => {
           return this.afs.doc<any>(`ejercicios/${exercise.id}`).snapshotChanges();
@@ -48,9 +49,9 @@ export class SignedInComponent implements OnInit {
     }))
   }
 
-  removeExerciseFollow(id) {
+  removeExerciseFollow(id, weight, reps) {
     console.log(id)
-    this.afs.doc(`users/${this.authService.afAuth.auth.currentUser.uid}`).ref.update('exercises', firebase.firestore.FieldValue.arrayRemove({id}));
+    this.afs.doc(`users/${this.authService.afAuth.auth.currentUser.uid}`).ref.update('exercises', firebase.firestore.FieldValue.arrayRemove({id, weight, reps}));
   }
 
   openEditProfileModal() {
@@ -66,6 +67,25 @@ export class SignedInComponent implements OnInit {
       }).then(modalComponent => {
         modalComponent.present();
       })
+    })
+  }
+
+  openExerciseInfoModal(id: string) {
+    this.modalController.create({
+      component: ExerciseDescriptionComponent,
+      componentProps: {
+        exerciseId: id
+      }
+    }).then(modalEl => {
+      modalEl.present();
+    })
+  }
+
+  openExerciseFollowList() {
+    this.modalController.create({
+      component: ExerciseFollowListComponent
+    }).then(modalEl => {
+      modalEl.present();
     })
   }
 

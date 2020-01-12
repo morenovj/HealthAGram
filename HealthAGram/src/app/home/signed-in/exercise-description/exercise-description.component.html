@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Descripcion ejercicio</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button fill="clear" (click)="modalDismiss()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ (actividad | async)?.nombre }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <iframe width="100%" height="315" [src]="(actividad | async)?.videoURL | youtube" frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

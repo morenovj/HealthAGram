@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Elige los ejercicios que quieras seguir</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button fill="clear" (click)="modalDismiss()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let exercise of exerciseList | async" style="border-radius: 10px;" color="primary" (click)="followExercise(exercise.payload.doc.id)">
+      <ion-icon name="checkbox-outline" slot="end" *ngIf="subscribedExerciseIds.includes(exercise.payload.doc.id)"></ion-icon>
+      <ion-label>{{ exercise.payload.doc.data().nombre }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

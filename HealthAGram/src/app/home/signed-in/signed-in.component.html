@@ -123,6 +123,9 @@
       <ion-card style="height: 90%">
         <ion-card-header>
           <ion-item color="primary" lines="none">
+            <ion-button (click)="openExerciseFollowList()" slot="end" fill="clear">
+              <ion-icon slot="icon-only" name="create" color="dark"></ion-icon>
+            </ion-button>
             Ejercicios
           </ion-item>
         </ion-card-header>
@@ -133,23 +136,23 @@
                 <ion-card-header>
                   <ion-card-title>{{ exercise.payload.data().nombre }}</ion-card-title>
                 </ion-card-header>
-                <ion-card-content>
+                <ion-card-content *ngIf="(authService.user | async) as user">
                   <ion-grid>
                     <ion-row>
                       <ion-col size="6">
                         <h2>Peso</h2>
-                        <p>{{ (authService.user | async)?.exercises[index].weight }}</p>
+                        <p>{{ user?.exercises[index].weight }}</p>
                       </ion-col>
                       <ion-col size="6">
                         <h2>Reps</h2>
-                        <p>{{ (authService.user | async)?.exercises[index].reps }}</p>
+                        <p>{{ user?.exercises[index].reps }}</p>
                       </ion-col>
                     </ion-row>
                   </ion-grid>
-                  <ion-button (click)="confirmGymRemoval()" slot="end" fill="clear">
+                  <ion-button (click)="openExerciseInfoModal(exercise.payload.id)" slot="end" fill="clear">
                     <ion-icon slot="icon-only" name="information-circle-outline" color="dark"></ion-icon>
                   </ion-button>
-                  <ion-button (click)="removeExerciseFollow(exercise.payload.id)" slot="end" fill="clear">
+                  <ion-button (click)="removeExerciseFollow(exercise.payload.id, user.exercises[index].weight, user.exercises[index].reps)" slot="end" fill="clear">
                     <ion-icon slot="icon-only" name="close" color="danger"></ion-icon>
                   </ion-button>
                 </ion-card-content>
