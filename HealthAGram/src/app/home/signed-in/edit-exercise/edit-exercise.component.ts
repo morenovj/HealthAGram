@@ -34,6 +34,8 @@ export class EditExerciseComponent implements OnInit {
     this.afs.doc(`users/${this.authService.afAuth.auth.currentUser.uid}`).ref.update('exercises', firebase.firestore.FieldValue.arrayRemove({id: this.id, weight: this.weight, reps: this.reps})).then(() => {
       this.afs.doc(`users/${this.authService.afAuth.auth.currentUser.uid}`).ref.update('exercises', firebase.firestore.FieldValue.arrayUnion({id: this.id, weight: this.editingForm.value.weight, reps: this.editingForm.value.reps}))
     });
+
+    this.modalDismiss();
   }
 
 }
