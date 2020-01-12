@@ -155,6 +155,9 @@
                   <ion-button (click)="openExerciseInfoModal(exercise.payload.id)" slot="end" fill="clear">
                     <ion-icon slot="icon-only" name="information-circle-outline" color="dark"></ion-icon>
                   </ion-button>
+                  <ion-button (click)="updateExerciseDetails(exercise.payload.id, index, user.exercises[index].weight, user.exercises[index].reps)" slot="end" fill="clear">
+                    <ion-icon slot="icon-only" name="create" color="dark"></ion-icon>
+                  </ion-button>
                   <ion-button (click)="removeExerciseFollow(exercise.payload.id, user.exercises[index].weight, user.exercises[index].reps)" slot="end" fill="clear">
                     <ion-icon slot="icon-only" name="close" color="danger"></ion-icon>
                   </ion-button>

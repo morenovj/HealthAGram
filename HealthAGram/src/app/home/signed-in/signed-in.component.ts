@@ -11,6 +11,7 @@ import { environment } from '../../../environments/environment'
 import * as firebase from 'firebase/app';
 import { ExerciseDescriptionComponent } from './exercise-description/exercise-description.component';
 import { CreateGymComponent } from './create-gym/create-gym.component';
+import { EditExerciseComponent } from './edit-exercise/edit-exercise.component';
 
 @Component({
   selector: 'app-signed-in',
@@ -51,8 +52,21 @@ export class SignedInComponent implements OnInit {
   }
 
   removeExerciseFollow(id, weight, reps) {
-    console.log(id)
     this.afs.doc(`users/${this.authService.afAuth.auth.currentUser.uid}`).ref.update('exercises', firebase.firestore.FieldValue.arrayRemove({id, weight, reps}));
+  }
+
+  updateExerciseDetails(id, index, weight, reps) {
+    this.modalController.create({
+      component: EditExerciseComponent,
+      componentProps: {
+        id,
+        index,
+        weight,
+        reps
+      }
+    }).then(modalEl => {
+      modalEl.present();
+    })
   }
 
   openEditProfileModal() {
