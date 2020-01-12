@@ -10,6 +10,7 @@ import { take, switchMap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment'
 import * as firebase from 'firebase/app';
 import { ExerciseDescriptionComponent } from './exercise-description/exercise-description.component';
+import { CreateGymComponent } from './create-gym/create-gym.component';
 
 @Component({
   selector: 'app-signed-in',
@@ -76,6 +77,14 @@ export class SignedInComponent implements OnInit {
       componentProps: {
         exerciseId: id
       }
+    }).then(modalEl => {
+      modalEl.present();
+    })
+  }
+
+  createGym() {
+    this.modalController.create({
+      component: CreateGymComponent
     }).then(modalEl => {
       modalEl.present();
     })

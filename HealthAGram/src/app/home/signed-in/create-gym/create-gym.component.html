@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Editar Perfil</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button fill="clear" (click)="modalDismiss()">Cancelar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="gymCreationForm">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item color="none">
+            <ion-label position="floating">
+              <ion-icon name="create"></ion-icon>
+              Nombre
+            </ion-label>
+            <ion-input formControlName="nombre">
+            </ion-input>
+          </ion-item>
+          <ion-item color="none">
+            <ion-label position="floating">
+              <ion-icon name="locate"></ion-icon>
+              Direccion
+            </ion-label>
+            <ion-input formControlName="direccion">
+            </ion-input>
+          </ion-item>
+          <ion-item color="none">
+            <ion-label position="floating">
+              <ion-icon name="camera"></ion-icon>
+              Foto (link)
+            </ion-label>
+            <ion-input formControlName="foto">
+            </ion-input>
+          </ion-item>
+          <ion-item color="none">
+            <ion-label position="floating">
+              <ion-icon name="star"></ion-icon>
+              Rating
+            </ion-label>
+              <ion-range
+                min="0" max="10" pin="true"
+                ticks="true" value="0" formControlName="rating">
+              </ion-range>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">
+              <ion-icon name="clipboard"></ion-icon>
+              Descripcion
+            </ion-label>
+            <ion-textarea formControlName="descripcion"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- fab placed to the bottom end -->
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="onSubmit()" [disabled]="!gymCreationForm.valid">
+        <ion-icon name="checkmark"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </form>
+</ion-content>

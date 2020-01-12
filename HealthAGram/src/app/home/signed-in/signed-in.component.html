@@ -81,6 +81,9 @@
         </ion-card-header>
         <ion-card-header color *ngIf="!(authService.user | async)?.gym;">
           <ion-item color="primary" lines="none">
+            <ion-button (click)="createGym()" slot="end" fill="clear">
+              <ion-icon slot="icon-only" name="add" color="dark"></ion-icon>
+            </ion-button>
             <ion-card-title>No perteneces a un Gym</ion-card-title>
           </ion-item>
         </ion-card-header>

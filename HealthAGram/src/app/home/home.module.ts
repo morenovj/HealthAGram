@@ -11,6 +11,7 @@ import { EditProfileComponent } from './signed-in/edit-profile/edit-profile.comp
 import { ExerciseFollowListComponent } from './signed-in/exercise-follow-list/exercise-follow-list.component';
 import { ExerciseDescriptionComponent } from './signed-in/exercise-description/exercise-description.component'
 import { PipesModule } from '../pipes/pipes.module';
+import { CreateGymComponent } from './signed-in/create-gym/create-gym.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,7 @@ import { PipesModule } from '../pipes/pipes.module';
       }
     ])
   ],
-  declarations: [HomePage, NotSignedInComponent, SignedInComponent, EditProfileComponent, ExerciseFollowListComponent, ExerciseDescriptionComponent],
-  entryComponents: [EditProfileComponent, ExerciseFollowListComponent, ExerciseDescriptionComponent]
+  declarations: [HomePage, NotSignedInComponent, SignedInComponent, EditProfileComponent, ExerciseFollowListComponent, ExerciseDescriptionComponent, CreateGymComponent],
+  entryComponents: [EditProfileComponent, ExerciseFollowListComponent, ExerciseDescriptionComponent, CreateGymComponent]
 })
 export class HomePageModule {}
