@@ -61,29 +61,19 @@
           <ion-card-content>
             <ion-grid>
               <ion-row>
-                <ion-col size="12">
+                <ion-col size="12" *ngFor="let gym of topGyms | async">
                   <ion-card color="secondary">
+                    <ion-avatar style="position: absolute; left: 5px; top: 5px">
+                      <img [src]="gym?.foto" />
+                    </ion-avatar>
                     <ion-card-header>
-                      <ion-card-subtitle>Posicion en ranking</ion-card-subtitle>
-                      <ion-card-title>Nombre Gym</ion-card-title>
-                    </ion-card-header>
-                  </ion-card>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col size="6">
-                  <ion-card color="secondary">
-                    <ion-card-header>
-                      <ion-card-subtitle>Posicion en ranking</ion-card-subtitle>
-                      <ion-card-title>Nombre Gym</ion-card-title>
-                    </ion-card-header>
-                  </ion-card>
-                </ion-col>
-                <ion-col size="6">
-                  <ion-card color="secondary">
-                    <ion-card-header>
-                      <ion-card-subtitle>Posicion en ranking</ion-card-subtitle>
-                      <ion-card-title>Nombre Gym</ion-card-title>
+                      <ion-card-subtitle>
+                        {{ gym?.rating }}
+                        <ion-icon name="star" color="dark"></ion-icon>
+                      </ion-card-subtitle>
+                      <ion-card-title>
+                        {{ gym?.nombre }}
+                      </ion-card-title>
                     </ion-card-header>
                   </ion-card>
                 </ion-col>
